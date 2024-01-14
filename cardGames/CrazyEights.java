@@ -2,14 +2,20 @@
 
 //eights wild, 2 draw 2, ace skip;
 //github test
+package cardGames;
 
 import java.util.ArrayList;
-import java.util.Random;
+//import java.util.Random;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class CrazyEights{
-    private int value;
+
+
+  //to do : change val52 to v52
+  //add inheritance.
+  /* 
+  private int value;
     private String suit;
     private int val52;
 
@@ -106,7 +112,7 @@ return this.value;
         // System.out.println("randCard is " + randCard);
         }  
 */
-
+/* 
 cardValue = (cardDrawn-1)%13 + 1;
 
          //int randCardValue = arr.get(randCard);
@@ -216,7 +222,7 @@ else{
 
         }
 
-    
+    */
 
 
 
@@ -224,17 +230,17 @@ else{
   public static void playCrazyEights(Scanner scnr) throws InputMismatchException {
 
     ArrayList<Integer> deck = new ArrayList<Integer>();
-    deck = createDeck();
+    deck = card.createDeck();
 
-    ArrayList<CrazyEights> yourHand = new ArrayList<CrazyEights>();
-    createStartingHand(yourHand,deck);
+    ArrayList<card> yourHand = new ArrayList<card>();
+    card.createStartingHand(yourHand,deck);
 
-    ArrayList<CrazyEights> oppHand = new ArrayList<CrazyEights>();
-    createStartingHand(oppHand,deck);
+    ArrayList<card> oppHand = new ArrayList<card>();
+    card.createStartingHand(oppHand,deck);
 
-    ArrayList<CrazyEights> discardPile = new ArrayList<CrazyEights>();
+    ArrayList<card> discardPile = new ArrayList<card>();
 
-    CrazyEights topCard = drawOneCardNoReplace(deck);
+    card topCard = card.drawOneCardNoReplace(deck);
     String highSuit = "";
 
     int input;
@@ -262,7 +268,7 @@ else{
       if(deck.size()<5){
         System.out.println("Shuffling discard pile back into the deck");
         while(discardPile.size()>0){
-          deck.add(discardPile.get(0).getVal52());
+          deck.add(discardPile.get(0).getV52());
           discardPile.remove(0);
         }
       }
@@ -275,7 +281,7 @@ else{
         //System.out.println("Cards accounted for: " + (oppHand.size() + yourHand.size() + 1 + discardPile.size() + deck.size()));
         System.out.print("The top card is ");
         
-        if(topCard.getVal52() != 53){
+        if(topCard.getV52() != 53){
         topCard.printCard();
         }
         else{
@@ -289,7 +295,7 @@ else{
         while(!validInput && !yourTurnSkipped && !youPickUpTwo){
 
         System.out.println("Your hand: ");
-        printHand(yourHand);
+        card.printHand(yourHand);
         System.out.println((yourHand.size()+1)+": Draw 1 card");
         System.out.println();
 
@@ -310,7 +316,7 @@ else{
           }          
           
           if(input==(yourHand.size()+1)){
-            yourHand.add(drawOneCardNoReplace(deck));
+            yourHand.add(card.drawOneCardNoReplace(deck));
             System.out.println("You drew a card");
             break;
           }
@@ -319,7 +325,7 @@ else{
               System.out.println("Wildcard played, what suit would you like to be played?");
               System.out.printf("1:hearts\n2:diamonds\n3:spades\n4:clubs\n");
               
-              if(topCard.getVal52()!=53){
+              if(topCard.getV52()!=53){
               discardPile.add(topCard);
               }
 
@@ -328,22 +334,22 @@ else{
                   input2 = scnr.nextInt();
                     if(input2 == 1){
                       System.out.println("Top card is the 8 of " + yourHand.get(input-1).getSuit() +" but the next card played must be an eight or a Heart");
-                      topCard = new CrazyEights(8, "Hearts", 53);
+                      topCard = new card(8, "Hearts", 53);
                       break;
                     }
                     if(input2 == 2){
                       System.out.println("Top card is the 8 of " + yourHand.get(input-1).getSuit() +" but the next card played must be an eight or a Diamond");
-                      topCard = new CrazyEights(8, "Diamonds", 53);
+                      topCard = new card(8, "Diamonds", 53);
                       break;
                     }
                     if(input2 == 3){
                       System.out.println("Top card is the 8 of " + yourHand.get(input-1).getSuit() +" but the next card played must be an eight or a Spade");
-                      topCard = new CrazyEights(8, "Spades", 53);
+                      topCard = new card(8, "Spades", 53);
                       break;
                     }
                     if(input2 == 4){
                       System.out.println("Top card is the 8 of " + yourHand.get(input-1).getSuit() +" but the next card played must be an eight or a Club");
-                      topCard = new CrazyEights(8, "Clubs", 53);
+                      topCard = new card(8, "Clubs", 53);
                       break;
                     }
                     else{
@@ -376,7 +382,7 @@ else{
             oppTurnSkipped = true;
           }
           
-          if(topCard.getVal52()!=53){
+          if(topCard.getV52()!=53){
             discardPile.add(topCard);
             }
 
@@ -401,8 +407,8 @@ else{
 
             if(youPickUpTwo){
               System.out.println("You pick up 2 cards");
-              yourHand.add(drawOneCardNoReplace(deck));
-              yourHand.add(drawOneCardNoReplace(deck));
+              yourHand.add(card.drawOneCardNoReplace(deck));
+              yourHand.add(card.drawOneCardNoReplace(deck));
 
             }
               youPickUpTwo = false;
@@ -424,8 +430,8 @@ else{
           oppTurnSkipped = false;
           if(oppPicksUpTwo){
             System.out.println("Opponent picks up 2 cards");
-            oppHand.add(drawOneCardNoReplace(deck));
-            oppHand.add(drawOneCardNoReplace(deck));
+            oppHand.add(card.drawOneCardNoReplace(deck));
+            oppHand.add(card.drawOneCardNoReplace(deck));
             oppPicksUpTwo = false;
           }
           System.out.println();
@@ -435,19 +441,19 @@ else{
 
       for(int i=0;i<oppHand.size();i++){
           if (oppHand.get(i).getValue()==8){
-            highSuit = getMostSuits(oppHand);
+            highSuit = card.getMostSuits(oppHand);
             System.out.println("Opponent played the eight of " + oppHand.get(i).getSuit() + ", and has chosen the suit to be " + highSuit);
             
             
 
 
-            if(topCard.getVal52()!=53){
+            if(topCard.getV52()!=53){
               discardPile.add(topCard);
               }
               discardPile.add(oppHand.get(i));
               oppHand.remove(i);
             
-            topCard= new CrazyEights(8, highSuit, 53);
+            topCard= new card(8, highSuit, 53);
             break;
           }
         
@@ -462,7 +468,7 @@ else{
             yourTurnSkipped = true;
           }
           
-          if(topCard.getVal52()!=53){
+          if(topCard.getV52()!=53){
             discardPile.add(topCard);
             }
 
@@ -474,7 +480,7 @@ else{
           }
           else if(i==oppHand.size()-1){
             System.out.println("Opponent picked up a card");
-            oppHand.add(drawOneCardNoReplace(deck));
+            oppHand.add(card.drawOneCardNoReplace(deck));
             break;
             }
           }
